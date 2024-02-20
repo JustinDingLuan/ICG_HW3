@@ -27,7 +27,7 @@ bool TriangleMesh::LoadMaterial(const std::string filePath, std::string filename
 	string filetype = filename.substr(filename.length() - 3, 3);
 
 	if (!Materialfile.is_open() || filetype != "mtl") {
-		cout << "沒讀到mtl檔QQ" << endl;
+		cout << "cannot find mtl file" << endl;
 		return false;
 	}
 	else {
@@ -100,8 +100,7 @@ bool TriangleMesh::LoadFromFile(const std::string filePath, const bool normalize
 	ifstream OBJfile(Path);
 	string s;
 
-	if (!OBJfile.is_open()) {
-		//cout << "沒讀到obj檔QQ" << endl;
+	if (!OBJfile.is_open()) {		
 		return false;
 	}
 	else {
