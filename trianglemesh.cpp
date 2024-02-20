@@ -96,12 +96,12 @@ bool TriangleMesh::LoadFromFile(const std::string filePath, const bool normalize
 {	
 	int index = static_cast<int>(filePath.find("."));
 	string filename = filePath.substr(0, index);
-	string Path = "ICG2022_HW3_Test_Models/" + filename + "/" + filePath;
+	string Path = "ICG2022_HW3_Test_Models/" + filename + "/" + filePath + ".obj";
 	ifstream OBJfile(Path);
 	string s;
 
 	if (!OBJfile.is_open()) {
-		cout << "沒讀到obj檔QQ" << endl;
+		//cout << "沒讀到obj檔QQ" << endl;
 		return false;
 	}
 	else {

@@ -278,16 +278,20 @@ void LoadObjects()
     mesh = new TriangleMesh();
     std::string filename;
     std::cout << "Please Enter Your Filename" << std::endl;
-    std::cin >> filename;
+    bool success_load = false;
+    while (!success_load) {        
+        std::cin >> filename;
 
-    if (mesh->LoadFromFile(filename, true)) {
-        mesh->ShowInfo();
-        sceneObj.mesh = mesh;
-        mesh->createbuffer();
-    }
-    else {
-        std::cout << "檔案名輸入錯誤 ~" << std::endl;
-    }
+        if (mesh->LoadFromFile(filename, true)) {
+            mesh->ShowInfo();
+            sceneObj.mesh = mesh;
+            mesh->createbuffer();
+            success_load = true;
+        }
+        else {
+            std::cout << "不存在此檔案or格式有誤" << std::endl;
+        }
+    }    
 }
 
 void CreateSkybox()
@@ -297,16 +301,20 @@ void CreateSkybox()
     float radius = 50.0f;
 
     std::string skyboxname;
-    std::cout << "Please Enter Your SkyboxFilename" << std::endl;
-    std::cin >> skyboxname;
-    skyboxname = "textures/" + skyboxname;
+    std::cout << "Please Enter Your SkyboxFilename : (only .png file)" << std::endl;
+    bool success_load = false;
+    while (!success_load) {
+        std::cin >> skyboxname;
+        skyboxname = "textures/" + skyboxname;
 
-    if (skyboxname.substr(skyboxname.length() - 3, 3) != "png") {
-        std::cout << "檔案格式錯誤" << std::endl;
-    }
-    else {
-        skybox = new Skybox(skyboxname, numSlices, numStacks, radius);
-    }
+        if (skyboxname.substr(skyboxname.length() - 3, 3) != "png") {
+            std::cout << "檔案不存在or格式有誤" << std::endl;
+        }
+        else {
+            skybox = new Skybox(skyboxname, numSlices, numStacks, radius);
+            success_load = true;
+        }
+    }    
 }
 
 void ProcessKeysCB(unsigned char key, int x, int y)
